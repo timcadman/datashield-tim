@@ -2,7 +2,6 @@
 #' 
 #' @param mod output from function ds.makeGlmForm
 #' @param type type of analysis (either "ipd" or "slma") 
-#' @param dummy_suff suffix used for dummy variables in case of ipd
 #' @param df serverside dataframe
 #' @param conns datashield connections object
 #' @importFrom dsBaseClient ds.glm ds.glmSLMA
@@ -10,7 +9,7 @@
 #' @return runs regression model
 #' 
 #' @export
-dt.glmWrap <- function(mod, type = c("ipd", "slma"), dummy_suff = "_dummy", df = "analysis_df", conns = NULL){
+dt.glmWrap <- function(mod, type = c("ipd", "slma"), df = "analysis_df", conns = NULL){
   
   type <- arg_match(type)
 

@@ -4,20 +4,12 @@
 \alias{dt.glmWrap}
 \title{Wrapper for the glm function to save repeating arguments when using many times in the same script}
 \usage{
-dt.glmWrap(
-  mod,
-  type = c("ipd", "slma"),
-  dummy_suff = "_dummy",
-  df = "analysis_df",
-  conns = NULL
-)
+dt.glmWrap(mod, type = c("ipd", "slma"), df = "analysis_df", conns = NULL)
 }
 \arguments{
 \item{mod}{output from function ds.makeGlmForm}
 
 \item{type}{type of analysis (either "ipd" or "slma")}
-
-\item{dummy_suff}{suffix used for dummy variables in case of ipd}
 
 \item{df}{serverside dataframe}
 
