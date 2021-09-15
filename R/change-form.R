@@ -11,7 +11,7 @@
 #' @return runs regression model
 #' 
 #' @export
-dt.changeForm <- function(model, var, type = c("add", "remove"), category = c("exposure", "outcome", "covariates", "cohort")){
+dt.changeForm <- function(model, var, type = c("add", "remove"), category = c("exposure", "outcome", "covariates", "cohorts")){
   
 type <- arg_match(type)
 category <- arg_match(category)
