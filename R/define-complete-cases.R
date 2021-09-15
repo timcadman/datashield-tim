@@ -16,8 +16,6 @@
 dt.defineCompleteCase <- function(
   df = NULL, vars = NULL, newobj = NULL, conns = NULL){
 
-  outcome <- NULL
-  
   if (is.null(df)) {
     stop("Please specify a data frame")
   }
@@ -26,7 +24,7 @@ dt.defineCompleteCase <- function(
     stop("Please specify variables for which to define complete cases")
   }
   
-  if (is.null(outcome)) {
+  if (is.null(newobj)) {
     stop("Please specify name for new object")
   }
   
