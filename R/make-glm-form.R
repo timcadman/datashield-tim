@@ -22,14 +22,14 @@ dt.makeGlmForm <- function(x, type = c("ipd", "slma"), dummy_suff = "_dummy", da
       
       mod <- list(
         model = paste0(
-          x$outcome, "~", x$exposure, "+", paste0(x$cohorts[-1], "_dummy", collapse = "+")),
+          x$outcome, "~", x$exposure, "+", paste0(x$cohorts[-1], dummy_suff, collapse = "+")),
         cohorts = x$"cohorts"
       )
     } else if(length(x$covariates) >0){
       
       mod <- list(
         model = paste0(x$outcome, "~", x$exposure, "+", paste0(x$covariates, collapse = "+"), 
-                       "+", paste0(x$cohorts[-1], "_dummy", collapse = "+")),
+                       "+", paste0(x$cohorts[-1], dummy_suff, collapse = "+")),
         cohorts = x$"cohorts"
       )
       
