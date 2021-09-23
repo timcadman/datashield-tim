@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #' Converts a list of formula components into a formula which can be used in 
 #' a glm.
 #' 
@@ -56,8 +57,3 @@ ds.makeGlmForm <- function(x, type = c("ipd", "slma"), dummy_suff = "_dummy", da
   
   return(mod)
 }
-
-
-
-
-
