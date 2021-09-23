@@ -13,7 +13,7 @@
 #' @return tibble in long format with coefficients by study and combined
 #' 
 #' @export
-forestDataSLMA <- function(obj, mod){
+dt.forestDataSLMA <- function(obj, mod){
   
   cohort <- se <- NULL
   
