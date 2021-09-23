@@ -19,4 +19,6 @@ Imports:
   dsBaseClient,
   dsHelper,
   purrr, 
-  dplyr
+  dplyr,
+  tidyr,
+  tibble
