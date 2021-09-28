@@ -11,17 +11,56 @@
 #' @return runs regression model
 #' 
 #' @export
-dt.changeForm <- function(model, var, type = c("add", "remove"), category = c("exposure", "outcome", "covariates", "cohorts")){
+dt.changeForm <- function(model = NULL, elements = NULL, vars = NULL, 
+                          type = c("add", "remove"), category = c(
+                            "exposure", "outcome", "covariates", "cohorts")){
+  
+  if (is.null(model)) {
+    stop("Please specify a model")
+  }
+  
+  if (is.null(elements)) {
+    stop("Please specify name of list element(s) to modify")
+  }
+  
+  if (is.null(var)) {
+    stop("Please specify variable to be added or removed")
+  }
+  
+## ---- Check values provide to elements argument are names of list element ----
+dont_exist <- elements[elements %in% names(model) == FALSE]
+  
+if(length(dont_exist) > 0){
+  
+  stop(paste0("The following strings provided to the 'elements' argument are not
+       names of components of the provided list:  ",  dont_exist))
+}  
   
 type <- arg_match(type)
 category <- arg_match(category)
 
-  if(type == "remove"){
-  
-  model %>% list_modify(., !!category := x[[category]][!x[[category]] %in% var])
-  } else if(type == "add"){
+## ---- Get original order of list so it can be returned in the same order -----
+name_order <- names(model)
 
-  model %>% list_modify(., !!category := c(x[[category]], var))
-  }
+## ---- Separate elements to be changed or not ---------------------------------
+to_change <- model[elements]
+no_change <- model[model != elements]
+
+
+## ---- Do the business --------------------------------------------------------
+if(type == "remove"){
+  
+  to_change %<>% map(function(x){list_modify(x, !!category := x[[category]][!x[[category]] %in% var])})
+} else if(type == "add"){
+  
+  to_change %<>% map(function(x){list_modify(x, !!category := c(x[[category]], var))})
+}
+
+
+## ---- Return list with changed elements --------------------------------------
+out <- c(to_change, no_change)
+out <- out[name_order]
+
+return(out)
   
 }
