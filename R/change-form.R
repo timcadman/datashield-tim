@@ -18,10 +18,10 @@ category <- arg_match(category)
 
   if(type == "remove"){
   
-  model %>% map(function(x){list_modify(x, !!category := x[[category]][!x[[category]] %in% var])})
+  model %>% list_modify(., !!category := x[[category]][!x[[category]] %in% var])
   } else if(type == "add"){
 
-  model %>% map(function(x){list_modify(x, !!category := c(x[[category]], var))})
+  model %>% list_modify(., !!category := c(x[[category]], var))
   }
   
 }

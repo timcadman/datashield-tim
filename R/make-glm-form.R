@@ -10,7 +10,7 @@
 #' @return a string of the created formula
 #' 
 #' @export
-ds.makeGlmForm <- function(x, type = c("ipd", "slma"), dummy_suff = "_dummy", data = "analysis_df"){
+dt.makeGlmForm <- function(x, type = c("ipd", "slma"), dummy_suff = "_dummy", data = "analysis_df"){
   
   mod <- . <- NULL
   
