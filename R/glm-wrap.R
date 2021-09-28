@@ -9,9 +9,11 @@
 #' @return runs regression model
 #' 
 #' @export
-dt.glmWrap <- function(mod, type = c("ipd", "slma"), df = "analysis_df", conns = NULL){
+dt.glmWrap <- function(mod, type = c("ipd", "slma"), df = "analysis_df",
+                       family = c("gaussian", "binomial"), conns = NULL){
   
   type <- arg_match(type)
+  family <- arg_match(family)
 
   if (is.null(conns)) {
     conns <- datashield.connections_find()
@@ -22,18 +24,17 @@ dt.glmWrap <- function(mod, type = c("ipd", "slma"), df = "analysis_df", conns =
     out <- ds.glm(
       formula = mod$model,
       data = df, 
-      family = "gaussian", 
+      family = family, 
       datasources = conns[mod$cohorts])
     
   }
-  
   
   else if(type == "slma"){
     
     out <- ds.glmSLMA(
       formula = mod$model,
       dataName = df, 
-      family = "gaussian",
+      family = family,
       datasources = conns[mod$cohorts])
   }
   
