@@ -12,8 +12,7 @@
 #' 
 #' @export
 dt.changeForm <- function(model = NULL, elements = NULL, vars = NULL, 
-                          type = c("add", "remove"), category = c(
-                            "exposure", "outcome", "covariates", "cohorts")){
+                          type = NULL, category = NULL){
   
   if (is.null(model)) {
     stop("Please specify a model")
@@ -36,8 +35,8 @@ if(length(dont_exist) > 0){
        names of components of the provided list:  ",  dont_exist))
 }  
   
-type <- arg_match(type)
-category <- arg_match(category)
+type <- arg_match(type, c("add", "remove"))
+category <- arg_match(category, c("exposure", "outcome", "covariates", "cohorts"))
 
 ## ---- Get original order of list so it can be returned in the same order -----
 name_order <- names(model)
@@ -50,10 +49,10 @@ no_change <- model[model != elements]
 ## ---- Do the business --------------------------------------------------------
 if(type == "remove"){
   
-  to_change %<>% map(function(x){list_modify(x, !!category := x[[category]][!x[[category]] %in% var])})
+  to_change %<>% map(function(x){list_modify(x, !!category := x[[category]][!x[[category]] %in% vars])})
 } else if(type == "add"){
   
-  to_change %<>% map(function(x){list_modify(x, !!category := c(x[[category]], var))})
+  to_change %<>% map(function(x){list_modify(x, !!category := c(x[[category]], vars))})
 }
 
 
