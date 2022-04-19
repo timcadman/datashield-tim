@@ -36,7 +36,8 @@ dt.defineCompleteCase <- function(
     map(
       ~ds.asNumeric(
         x.name = paste0(df, "$", .), 
-        newobj = paste0(., "_fact"))
+        newobj = paste0(., "_fact")), 
+        datasources = conns
       )
   
   form <- paste(paste0(vars, "_fact"), collapse = "+")
@@ -62,7 +63,8 @@ dt.defineCompleteCase <- function(
   )
   
   dh.tidyEnv(
-    obj = c(paste0(newobj, "_tmp"), paste0(newobj, "_na"))
-  )
+    obj = c(paste0(newobj, "_tmp"), paste0(newobj, "_na")), 
+    type = "remove", 
+    conns = conns)
   
 }
