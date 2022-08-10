@@ -19,7 +19,7 @@ dt.cohortTable <- function(ref, dataset, conns){
 
 value <- cohort <- NULL
 
-cohort_details <- read_csv(ref) 
+cohort_details <- read_csv(ref, show_col_types = FALSE) 
 
 cohort_dims <- ds.dim(dataset)
 
@@ -32,7 +32,8 @@ avail_coh <- names(conns)
 
 out <- left_join(cohort_details, cohort_ns, by = "cohort") %>%
   mutate(cohort_ns = value) %>%
-  dplyr::filter(cohort %in% avail_coh)
+  dplyr::filter(cohort %in% avail_coh) %>%
+  dplyr::select(-value)
 
 return(out)
 }
